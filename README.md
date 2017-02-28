@@ -35,14 +35,14 @@ The following **required** functionality is completed:
          better ways to implement something, how to extend your app in certain
          ways, etc):
 
-      1. 
-      2. 
+      1. Store the user data
+      2. The meaning of appdelegate functions
 
 ## Video Walkthrough 
 
       Here's a walkthrough of implemented user stories:
 
-      <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video
+      <img src='http://i.imgur.com/YAtsemp.gif' title='Video
       Walkthrough' width='' alt='Video Walkthrough' />
 
       GIF created with [LiceCap](http://www.cockos.com/licecap/).
