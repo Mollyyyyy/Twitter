@@ -22,7 +22,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.codepath.Twitter</string>
+			<string>codepath.com.Twitter</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>twitterdemoMolly</string>
