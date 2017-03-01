@@ -9,13 +9,13 @@
 
 import UIKit
 
-class TweetsTableViewCell: UITableViewCell {
+class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var photeImageView: UIImageView!
     @IBOutlet weak var profilenameLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
-
+    @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     
     var tweet: Tweet!{

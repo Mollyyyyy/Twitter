@@ -142,11 +142,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="contentLabel" destination="5gD-1j-ULC" id="AJa-yg-MVq"/>
                                             <outlet property="likeButton" destination="ydO-go-Et1" id="LP4-v7-Ud7"/>
                                             <outlet property="photeImageView" destination="Oof-VX-GZj" id="aKB-w2-iwm"/>
                                             <outlet property="profilenameLabel" destination="01U-AI-GrQ" id="qg3-Kw-6ub"/>
                                             <outlet property="retweetButton" destination="KmO-d6-t4k" id="NFz-0r-ZtU"/>
-                                            <outlet property="timestampLabel" destination="4Yx-z8-n7e" id="JvK-nf-Hyg"/>
+                                            <outlet property="timestampLabel" destination="5gD-1j-ULC" id="suQ-KS-ARa"/>
                                             <outlet property="usernameLabel" destination="7Zu-QD-VKF" id="EQj-8L-n0m"/>
                                         </connections>
                                     </tableViewCell>
