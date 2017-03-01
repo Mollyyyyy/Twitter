@@ -46,7 +46,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     func logOut() {
         User.currentUser = nil
         deauthorize()        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogOutNotification), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
     }
     func currentAccount(){
         get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success:
