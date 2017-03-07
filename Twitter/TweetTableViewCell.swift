@@ -12,19 +12,38 @@ import UIKit
 class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var photeImageView: UIImageView!
-    @IBOutlet weak var profilenameLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
-    @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var profilenameLabel: UILabel!
+    @IBOutlet weak var retweetcount: UILabel!
+    @IBOutlet weak var likecount: UILabel!
+    @IBOutlet weak var photoImageView: UIImageView!
     
     var tweet: Tweet!{
-    didSet {
-        profilenameLabel.text = tweet.name!
-        usernameLabel.text = "@+\(tweet.screenname!)"
-        timestampLabel.text = timeAgoSince(tweet.timestamp!)
-        contentLabel.text = tweet.text! as String?
-        photeImageView.setImageWith(tweet.profileUrl!)
+        didSet {
+            profilenameLabel.text = tweet.name!
+            usernameLabel.text = "@+\(tweet.screenname!)"
+            timestampLabel.text = timeAgoSince(tweet.timestamp!)
+            contentLabel.text = tweet.text! as String?
+            photoImageView.setImageWith(tweet.profileUrl!)
+            if let retweet = self.tweet?.retweetcount{
+            retweetcount.text =  String(retweet)}
+            if let like = self.tweet?.likecount{
+                likecount.text =  String(like)}
+            if(tweet.liked == false){
+                likeButton.setImage(UIImage(named: "Like"), for: .normal)
+            }
+            else{
+                likeButton.setImage(UIImage(named: "LikeAfter"), for: .normal)
+            }
+            if(tweet.retweeted == false){
+                retweetButton.setImage(UIImage(named: "Retweet"), for: .normal)
+            }
+            else{
+                retweetButton.setImage(UIImage(named: "RetweetAfter"), for: .normal)
+            }
         }
     }
     func timeAgoSince(_ date: Date) -> String {
@@ -89,32 +108,57 @@ class TweetTableViewCell: UITableViewCell {
         return "Just now"
     }
     @IBAction func pressRetweet(_ sender: Any) {
-        TwitterClient.sharedInstance?.retweet(id: Int(tweet.id), success: { (tweet: Tweet) in
-            self.tweet = tweet
+        if(self.tweet.retweeted == false){
+        TwitterClient.sharedInstance?.retweet(id: (tweet?.id)!, success: {
+            self.tweet.retweeted = true
+            self.tweet.retweetcount = self.tweet.retweetcount! + 1
+            if let retweet = self.tweet?.retweetcount{
+                    self.retweetcount.text =  String(retweet)}
             self.retweetButton.setImage(UIImage(named: "RetweetAfter"), for: .normal)
         }, failure: { (error: Error) in
             print(error.localizedDescription)
-        })
+        })}
+        else{
+            TwitterClient.sharedInstance?.unretweet(id: (tweet?.id)!, success: {
+            self.tweet.retweeted = false
+            self.tweet.retweetcount = self.tweet.retweetcount! - 1
+            if let retweet = self.tweet?.retweetcount{
+                    self.retweetcount.text =  String(retweet)}
+            self.retweetButton.setImage(UIImage(named: "Retweet"), for: .normal)
+            }, failure: { (error: Error) in
+                print(error.localizedDescription)
+            })}
     }
     @IBAction func pressLike(_ sender: Any) {
-        TwitterClient.sharedInstance?.like(id: Int(tweet.id), success: { (tweet: Tweet) in
-            self.tweet = tweet
-            self.likeButton.setImage(UIImage(named: "LikeAfter"), for: .normal)
-        }, failure: { (error: Error) in
+        if(self.tweet.liked == false){
+            TwitterClient.sharedInstance!.like(id: (tweet?.id)!, success: {
+                self.tweet.liked = true
+                self.tweet.likecount = self.tweet.likecount! + 1
+                if let like = self.tweet?.likecount{
+                    self.likecount.text =  String(like)}
+                self.likeButton.setImage(UIImage(named: "LikeAfter"), for: .normal)
+            }, failure: { (error: Error) in
             print(error.localizedDescription)
-        })
+        })}
+        else{
+            TwitterClient.sharedInstance!.unlike(id: (tweet?.id)!, success: {
+            self.tweet.liked = false
+            self.tweet.likecount = self.tweet.likecount! - 1
+            if let like = self.tweet?.likecount{
+                    self.likecount.text =  String(like)}
+            self.likeButton.setImage(UIImage(named: "Like"), for: .normal)
+            }, failure: { (error: Error) in
+                print(error.localizedDescription)
+        })}
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
-        // Initialization code
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
-
+    
 }

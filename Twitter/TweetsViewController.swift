@@ -53,15 +53,38 @@ UITableViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
+    override func viewWillAppear(_ animated: Bool) {        
+        TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
+            self.tweets = tweets
+            self.tableView.reloadData()
+        }, failure: { (error) in
+            print(error.localizedDescription)
+        })
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if (segue.identifier == "Detail") {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)
+            let tweet = tweets[indexPath!.row]
+            let detailVc = segue.destination as! DetailViewController
+            detailVc.tweet = tweet            
+        } 
+        else if(segue.identifier == "Profile"){
+            let button = sender as! UIButton
+            let cell = button.superview?.superview as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)
+            let tweet = tweets![(indexPath?.row)!]
+            let profileVc = segue.destination as! ProfileViewController
+            profileVc.user = tweet.user
+        }
     }
-    */
+    
+    
 
 }

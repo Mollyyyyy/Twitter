@@ -14,30 +14,36 @@ class Tweet: NSObject {
     var screenname: String?
     var text: String?
     var timestamp: Date?
-    var retweetCount: Int = 0
-    var favoritesCount: Int = 0
     var profileUrl: URL?
     var tagline:String?
-    var tweetDict: NSDictionary!
+    var user: User!
+    var dictionary: NSDictionary?
+    var retweetcount:Int?
+    var likecount: Int?
+    var retweeted: Bool?
+    var liked:Bool?
     init(dictionary: NSDictionary){
-        if let dictionary = dictionary["user"] as? NSDictionary{
-            id = (dictionary["id"] as? Int)!
-            name = dictionary["name"] as? String
-            screenname = dictionary["screen_name"] as? String
-            let profileUrlSting = dictionary["profile_image_url_https"] as? String
-            if let profileUrlSting = profileUrlSting{
-                profileUrl = URL(string: profileUrlSting)
-            }
-            tagline = dictionary["description"] as? String
-            text = dictionary["text"] as? String
-            retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
-            favoritesCount = (dictionary["favorites_count"] as? Int) ?? 0
-            let timestampString = dictionary["created_at"] as? String
-            if let timestampString = timestampString{
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
-                timestamp = formatter.date(from: timestampString)
-            }
+        self.dictionary = dictionary
+        user = User(dictionary: dictionary["user"] as! NSDictionary)
+        id = (dictionary["id"] as? Int)!
+        name = user.name
+        screenname = user.screenname
+        profileUrl = user.profileUrl
+        tagline = dictionary["description"] as? String
+        text = dictionary["text"] as? String
+        retweeted = dictionary["retweeted"] as? Bool
+        liked = dictionary["favorited"] as? Bool
+        retweetcount = (dictionary["retweet_count"] as? Int) ?? 0
+        likecount = (dictionary["favorite_count"] as? Int) ?? 0
+        
+        let timestampString = dictionary["created_at"] as? String
+
+        if let timestampString = timestampString{
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
+            timestamp = formatter.date(from: timestampString)
+            print(timestamp as Any)
+            
         }
     }
     class func tweetsWithArray(dictionaries:[NSDictionary]) -> [Tweet]{
