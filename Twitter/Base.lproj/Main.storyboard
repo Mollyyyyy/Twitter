@@ -64,7 +64,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PN8-WY-dNU" id="rmB-do-HMa">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Zu-QD-VKF">
@@ -209,7 +209,7 @@
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="onLogoutButton:" destination="hWk-hr-Z4o" id="JJI-BC-sc2"/>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="fNr-m1-GI0"/>
+                                <segue destination="BYZ-38-t0r" kind="presentation" id="97q-Eu-mkE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -307,7 +307,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
-                                            <segue destination="hWk-hr-Z4o" kind="presentation" id="2qS-wr-Ka3"/>
+                                            <action selector="onBack:" destination="6cu-Dn-q86" eventType="touchUpInside" id="AWO-cY-aiM"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3l-eL-kA7">
@@ -434,7 +434,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="hWk-hr-Z4o" kind="presentation" identifier="" id="6GW-ge-3LN"/>
+                                    <action selector="onHome:" destination="lhD-ae-2zy" eventType="touchUpInside" id="EXe-x6-6r9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOR-sk-LgQ">
@@ -566,7 +566,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yQh-8T-unj"/>
-        <segue reference="2qS-wr-Ka3"/>
+        <segue reference="Q7x-Oc-HfJ"/>
     </inferredMetricsTieBreakers>
 </document>

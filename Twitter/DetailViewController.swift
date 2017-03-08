@@ -46,7 +46,10 @@ class DetailViewController: UIViewController {
             timestampLabel.text = String(describing: time)}
         // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction func onHome(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     @IBAction func onRetweet(_ sender: Any) {
         if(self.tweet.retweeted == false){
             TwitterClient.sharedInstance?.retweet(id: (tweet?.id)!, success: {
